@@ -1,23 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useReducer } from "react";
+import rootReducer from './rootReducer';
+import DispatchContext from './dispatchContext';
+import ProductContext from "./productContext";
+import ProductsList from './ProductsList';
+
+/** 
+ * App 
+ * 
+ * props: none
+ * 
+ * state: 
+ * - products: obj of product objs like,
+ *              { id: {"name", "price", "description","image_url" },...}
+ * 
+ * App -> ProductsList
+ **/  
+
+const INITIAL_STATE = {
+  products: []
+};
 
 function App() {
+  const [state, dispatch] = useReducer(rootReducer, INITIAL_STATE);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DispatchContext.Provider value={dispatch}>
+        <ProductContext.Provider value={state.products}>
+          <ProductsList />
+        </ProductContext.Provider>
+      </DispatchContext.Provider>
     </div>
   );
 }
