@@ -4,6 +4,7 @@ import rootReducer from './rootReducer';
 import DispatchContext from './dispatchContext';
 import ProductContext from "./productContext";
 import ProductsList from './ProductsList';
+import data from './data.json';
 
 /** 
  * App 
@@ -18,7 +19,8 @@ import ProductsList from './ProductsList';
  **/  
 
 const INITIAL_STATE = {
-  products: []
+  products: data.products,
+  cart: []
 };
 
 function App() {
@@ -27,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <DispatchContext.Provider value={dispatch}>
-        <ProductContext.Provider value={state.products}>
+        <ProductContext.Provider value={state}>
           <ProductsList />
         </ProductContext.Provider>
       </DispatchContext.Provider>

@@ -3,14 +3,14 @@ function rootReducer(state, action) {
     case "ADD_TO_CART":
       return {
         ...state,
-        products: [
-          ...state.products, {...action.product }
+        cart: [
+          ...state.cart, {...action.product }
         ]
       };
     case "REMOVE_FROM_CART":
       return {
         ...state, 
-        products: state.products
+        cart: state.cart
                     .filter( prod => prod.id !== action.id)
       };
     default:
